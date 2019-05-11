@@ -85,8 +85,22 @@ gulp.task('watch', ['default'], function() {
     $.livereload.listen();
     // 确认监听的目标以及绑定相应的任务
     gulp.watch('src/js/*.js',['js']);
-    gulp.watch(['src/css/*.css', 'src/less/*.less'], ['css'])
+    gulp.watch(['src/css/*.css', 'src/less/*.less'], ['css']);     
 })
+
+
+// /**
+//  * 需要在文件变动后执行的一个或者多个通过 gulp.task() 创建的 task 的名字，
+//  * 
+//  */
+// var watcher = gulp.watch('src/*.js', ['default']);
+
+
+// watcher.on('change', function(event) {
+//     console.log(event, `event`);
+//     // console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    
+// })
 
 
 // 注册监视任务（全自动）   // 同步['default'] 默认任务
@@ -102,8 +116,11 @@ gulp.task('server', ['default'], function() {
     open('http:0.0.0.0:8989')
 
     // 确认监听的目标以及绑定相应的任务
-    gulp.watch('src/js/*.js',['js']);
-    gulp.watch(['src/css/*.css', 'src/less/*.less'], ['css'])
+   var watcher = gulp.watch('src/js/*.js',['js']);
+    gulp.watch(['src/css/*.css', 'src/less/*.less'], ['css']);
+    watcher.on('change', function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    })
 })
 
 
